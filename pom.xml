@@ -20,6 +20,13 @@
         <delombok.output>${project.basedir}/src/delombok</delombok.output>
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>falsepattern</id>
+            <url>https://mvn.falsepattern.com/releases</url>
+        </repository>
+    </distributionManagement>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
