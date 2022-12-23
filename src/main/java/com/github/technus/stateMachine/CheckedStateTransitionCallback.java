@@ -3,6 +3,8 @@ package com.github.technus.stateMachine;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.ArrayList;
+
 @Builder
 @Getter
 public class CheckedStateTransitionCallback<ContextT, UserDataT> implements StateTransitionCallback<State<ContextT, UserDataT>, ContextT> {

@@ -20,12 +20,12 @@ public interface StateMachineDefinition<ContextT, UserDataT, KeyT> extends UserD
 
     Function<UserDataT,KeyT> keyExtractor();
 
-    default StateMachineDefinition<ContextT, UserDataT, KeyT> transition(StateTransition<State<ContextT, UserDataT>, ContextT, UserDataT> transition){
+    default StateMachineDefinition<ContextT, UserDataT, KeyT> registerTransition(StateTransition<State<ContextT, UserDataT>, ContextT, UserDataT> transition){
         transitions().put(keyExtractor().apply(transition.userData()), transition);
         return this;
     }
 
-    default StateMachineDefinition<ContextT, UserDataT, KeyT> state(State<ContextT, UserDataT> state){
+    default StateMachineDefinition<ContextT, UserDataT, KeyT> registerState(State<ContextT, UserDataT> state){
         states().put(keyExtractor().apply(state.userData()), state);
         return this;
     }

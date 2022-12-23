@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Singular;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Builder
@@ -17,4 +18,12 @@ public class SimpleState<ContextT, UserDataT> implements State<ContextT, UserDat
      * Additional metadata
      */
     private final UserDataT                                                           userData;
+
+    public SimpleState(List<StateTransitionCallback<State<ContextT, UserDataT>, ContextT>> onEntryCallbacks,
+                       List<StateTransitionCallback<State<ContextT, UserDataT>, ContextT>> onLeaveCallbacks,
+                       UserDataT userData) {
+        this.onEntryCallbacks = new ArrayList<>(onEntryCallbacks);
+        this.onLeaveCallbacks = new ArrayList<>(onLeaveCallbacks);
+        this.userData = userData;
+    }
 }
