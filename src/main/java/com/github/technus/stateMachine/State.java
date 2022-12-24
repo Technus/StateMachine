@@ -6,7 +6,7 @@ import lombok.val;
 import java.util.List;
 
 public interface State<ContextT, UserDataT> extends UserDataSupplier<UserDataT> {
-    State<?, Object> UNDEFINED = SimpleState.builder().build();
+    State<?, ?> UNDEFINED = SimpleState.builder().build();
 
     @SuppressWarnings("unchecked")
     static <ContextT, UserDataT> State<ContextT, UserDataT> undefinedState() {

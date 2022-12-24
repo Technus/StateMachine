@@ -5,7 +5,7 @@
 
     <groupId>com.github.technus</groupId>
     <artifactId>stateMachine</artifactId>
-    <version>1.2.0</version>
+    <version>1.2.1</version>
 
     <name>State Machine</name>
     <url>https://github.com/Technus/StateMachine</url>

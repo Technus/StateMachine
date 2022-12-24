@@ -11,7 +11,7 @@ public class SimpleStateMachine<ContextT, UserDataT, KeyT> implements StateMachi
     private final ContextT                                    context;
     private final StateMachineDefinition<ContextT, UserDataT, KeyT> definition;
     @Builder.Default
-    @Setter(AccessLevel.PRIVATE)
+    @Setter(AccessLevel.PROTECTED)
     private       State<ContextT, UserDataT>                  state = State.undefinedState();
     /**
      * Additional metadata

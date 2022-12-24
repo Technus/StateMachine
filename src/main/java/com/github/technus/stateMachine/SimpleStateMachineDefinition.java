@@ -4,10 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Singular;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 @Builder
@@ -57,8 +54,8 @@ public class SimpleStateMachineDefinition<ContextT, UserDataT, KeyT> implements 
         this.onPreChangeCallbacks = new ArrayList<>(onPreChangeCallbacks);
         this.onInterChangeCallbacks = new ArrayList<>(onInterChangeCallbacks);
         this.onPostChangeCallbacks = new ArrayList<>(onPostChangeCallbacks);
-        this.transitions = new LinkedHashMap<>(transitions);
-        this.states = new LinkedHashMap<>(states);
+        this.transitions = new HashMap<>(transitions);
+        this.states = new HashMap<>(states);
         this.userData = userData;
         this.keyExtractor = keyExtractor;
     }

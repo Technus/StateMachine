@@ -25,7 +25,7 @@ public class ValidatingStateMachineDecorator<ContextT, UserDataT,KeyT> implement
         if (value == null)
             throw new IllegalArgumentException("State was not registered: "+nextState+" "+key);
         if(value!=nextState)
-            throw new IllegalArgumentException("Attempt to redefine state: "+nextState+" "+key);
+            throw new IllegalArgumentException("State definition does not match: "+nextState+" "+key);
 
         stateMachine.uncheckedChangeState(nextState);
     }
@@ -37,7 +37,7 @@ public class ValidatingStateMachineDecorator<ContextT, UserDataT,KeyT> implement
         if (value == null)
             throw new IllegalArgumentException("Transition was not registered: "+transition+" "+key);
         if(value!=transition)
-            throw new IllegalArgumentException("Attempt to redefine transition: "+transition+" "+key);
+            throw new IllegalArgumentException("Transition definition does not match: "+transition+" "+key);
 
         stateMachine.tryChangeState(desiredState, transition);
     }
