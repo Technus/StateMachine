@@ -63,7 +63,7 @@ public class SimpleTuringMachine {
 
     public void run(){
         while (!stateMachine.state().equals(f)) {
-            stateMachine.tryStateTransition(State.undefinedState());//avoid null
+            stateMachine.tryStateTransition();
         }
     }
 
