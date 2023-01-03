@@ -5,6 +5,11 @@ import lombok.*;
 public class SimpleTuringMachine {
     protected int position=0;
     protected char[] tape = "   010011111   ".toCharArray();
+    protected StateMachine<SimpleTuringMachine,String,String> stateMachine = SimpleStateMachine.<SimpleTuringMachine, String, String>builder()
+            .definition(stateMachineDefinition)
+            .context(new SimpleTuringMachine())
+            .state(q0)
+            .build();
 
     protected static State<SimpleTuringMachine, String> state(String name) {
         return SimpleState.<SimpleTuringMachine, String>builder()
@@ -56,14 +61,13 @@ public class SimpleTuringMachine {
             .registerTransition(transition("incrementEnd",  q2, f , -1, ' ', '1'))
             .build();
 
-    public static void main(String[] args) {
-        final SimpleStateMachine<SimpleTuringMachine, String, String> stateMachine = SimpleStateMachine.<SimpleTuringMachine, String, String>builder()
-                .definition(stateMachineDefinition)
-                .context(new SimpleTuringMachine())
-                .state(q0)
-                .build();
+    public void run(){
         while (!stateMachine.state().equals(f)) {
             stateMachine.tryStateTransition(State.undefinedState());//avoid null
         }
+    }
+
+    public static void main(String[] args) {
+        new SimpleTuringMachine().run();
     }
 }
