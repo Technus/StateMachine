@@ -9,9 +9,10 @@ package com.github.technus.stateMachine;
 public interface StateTransitionFunction<StateT, ContextT, ReturnT> {
     /**
      * Arbitrary function
+     *
      * @param previousState of the machine
-     * @param nextState of the machine
-     * @param context of the machine
+     * @param nextState     of the machine
+     * @param context       of the machine
      * @return some useful value (or not)
      * @throws Throwable in case something happens
      */

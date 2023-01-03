@@ -6,7 +6,8 @@ import java.util.List;
 
 /**
  * A unit in which the {@link StateMachine} can be
- * @param <ContextT> of the machine
+ *
+ * @param <ContextT>  of the machine
  * @param <UserDataT> attached to the state
  */
 public interface State<ContextT, UserDataT> extends UserDataSupplier<UserDataT> {
@@ -20,9 +21,10 @@ public interface State<ContextT, UserDataT> extends UserDataSupplier<UserDataT> 
     /**
      * State placeholder to use instead of 'null'
      * It will not contain any user data ever, you must explicitly check against 'this' state instance.
-     * @return Casted version of {@link State#UNDEFINED},
-     * @param <ContextT> of the machine
+     *
+     * @param <ContextT>  of the machine
      * @param <UserDataT> attached to the state
+     * @return Casted version of {@link State#UNDEFINED},
      */
     @SuppressWarnings("all")
     static <ContextT, UserDataT> State<ContextT, UserDataT> undefinedState() {
@@ -31,20 +33,23 @@ public interface State<ContextT, UserDataT> extends UserDataSupplier<UserDataT> 
 
     /**
      * List of callbacks to call when entering state.
+     *
      * @return list of callbacks
      */
     List<StateTransitionCallback<State<ContextT, UserDataT>, ContextT>> onEntryCallbacks();
 
     /**
      * List of callbacks to call when exiting state.
+     *
      * @return list of callbacks
      */
     List<StateTransitionCallback<State<ContextT, UserDataT>, ContextT>> onLeaveCallbacks();
 
     /**
      * The callback caller, used by {@link StateMachine}
+     *
      * @param previous state
-     * @param context of the machine
+     * @param context  of the machine
      */
     @SneakyThrows
     default void onEntry(State<ContextT, UserDataT> previous, ContextT context) {
@@ -55,7 +60,8 @@ public interface State<ContextT, UserDataT> extends UserDataSupplier<UserDataT> 
 
     /**
      * The callback caller, used by {@link StateMachine}
-     * @param next state
+     *
+     * @param next    state
      * @param context of the machine
      */
     @SneakyThrows

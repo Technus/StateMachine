@@ -1,34 +1,37 @@
 package com.github.technus.stateMachine;
 
-import lombok.SneakyThrows;
-import lombok.val;
+import lombok.*;
 
 import java.util.List;
 
 /**
  * Defines the state transition of a machine
- * @param <StateT> of the machine
- * @param <ContextT> of the machine
+ *
+ * @param <StateT>    of the machine
+ * @param <ContextT>  of the machine
  * @param <UserDataT> of the transition
  */
 public interface StateTransition<StateT, ContextT, UserDataT> extends StateTransitionFunction<StateT, ContextT, StateT>, UserDataSupplier<UserDataT> {
     /**
      * Callbacks to run on transition begin
+     *
      * @return list of callbacks
      */
     List<StateTransitionCallback<StateT, ContextT>> beginCallbacks();
 
     /**
      * Callbacks to run on transition finish
+     *
      * @return list of callbacks
      */
     List<StateTransitionCallback<StateT, ContextT>> finishCallbacks();
 
     /**
      * Helper to call all {@link StateTransition#beginCallbacks()}
+     *
      * @param previous state
-     * @param next state
-     * @param context of the machine
+     * @param next     state
+     * @param context  of the machine
      */
     @SneakyThrows
     default void onBegin(StateT previous, StateT next, ContextT context) {
@@ -39,9 +42,10 @@ public interface StateTransition<StateT, ContextT, UserDataT> extends StateTrans
 
     /**
      * Helper to call all {@link StateTransition#finishCallbacks()}
+     *
      * @param previous state
-     * @param next state
-     * @param context of the machine
+     * @param next     state
+     * @param context  of the machine
      */
     @SneakyThrows
     default void onFinish(StateT previous, StateT next, ContextT context) {

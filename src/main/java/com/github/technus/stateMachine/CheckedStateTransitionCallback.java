@@ -1,14 +1,11 @@
 package com.github.technus.stateMachine;
 
-import lombok.Builder;
-import lombok.Getter;
-
-import java.util.ArrayList;
+import lombok.*;
 
 @Builder
 @Getter
 public class CheckedStateTransitionCallback<ContextT, UserDataT> implements StateTransitionCallback<State<ContextT, UserDataT>, ContextT> {
-    private final StateTransitionCallback<State<ContextT, UserDataT>, ContextT>          transitionHandler;
+    private final StateTransitionCallback<State<ContextT, UserDataT>, ContextT> transitionHandler;
     private final StateTransitionFunction<State<ContextT, UserDataT>, ContextT, Boolean> transitionPredicate;
 
     @Override

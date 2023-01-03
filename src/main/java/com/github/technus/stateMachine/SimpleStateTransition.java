@@ -1,8 +1,6 @@
 package com.github.technus.stateMachine;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Singular;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +15,7 @@ public class SimpleStateTransition<ContextT, UserDataT> implements StateTransiti
     /**
      * Additional metadata
      */
-    private final UserDataT                                                           userData;
+    private final UserDataT userData;
 
     @Override
     public State<ContextT, UserDataT> apply(State<ContextT, UserDataT> previousState, State<ContextT, UserDataT> nextState, ContextT context) {

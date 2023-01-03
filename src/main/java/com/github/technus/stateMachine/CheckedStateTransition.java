@@ -1,8 +1,6 @@
 package com.github.technus.stateMachine;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Singular;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +9,9 @@ import java.util.List;
 @Getter
 public class CheckedStateTransition<ContextT, UserDataT> implements StateTransition<State<ContextT, UserDataT>, ContextT, UserDataT> {
     @Singular
-    private final List<StateTransitionCallback<State<ContextT, UserDataT>, ContextT>>                       beginCallbacks;
+    private final List<StateTransitionCallback<State<ContextT, UserDataT>, ContextT>> beginCallbacks;
     @Singular
-    private final List<StateTransitionCallback<State<ContextT, UserDataT>, ContextT>>                       finishCallbacks;
+    private final List<StateTransitionCallback<State<ContextT, UserDataT>, ContextT>> finishCallbacks;
     private final StateTransitionFunction<State<ContextT, UserDataT>, ContextT, State<ContextT, UserDataT>> transitionPredicate;
 
     private final UserDataT userData;

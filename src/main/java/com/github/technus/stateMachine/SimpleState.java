@@ -1,8 +1,6 @@
 package com.github.technus.stateMachine;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Singular;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +15,7 @@ public class SimpleState<ContextT, UserDataT> implements State<ContextT, UserDat
     /**
      * Additional metadata
      */
-    private final UserDataT                                                           userData;
+    private final UserDataT userData;
 
     public SimpleState(List<StateTransitionCallback<State<ContextT, UserDataT>, ContextT>> onEntryCallbacks,
                        List<StateTransitionCallback<State<ContextT, UserDataT>, ContextT>> onLeaveCallbacks,

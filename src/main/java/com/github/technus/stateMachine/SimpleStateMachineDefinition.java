@@ -1,10 +1,11 @@
 package com.github.technus.stateMachine;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Singular;
+import lombok.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 @Builder
@@ -14,17 +15,17 @@ public class SimpleStateMachineDefinition<ContextT, UserDataT, KeyT> implements 
      * Handlers to call before the actual transition happen
      */
     @Singular
-    private final List<StateTransitionCallback<State<ContextT, UserDataT>, ContextT>>         onPreChangeCallbacks;
+    private final List<StateTransitionCallback<State<ContextT, UserDataT>, ContextT>> onPreChangeCallbacks;
     /**
      * Handlers to call after the actual transition happen
      */
     @Singular
-    private final List<StateTransitionCallback<State<ContextT, UserDataT>, ContextT>>         onInterChangeCallbacks;
+    private final List<StateTransitionCallback<State<ContextT, UserDataT>, ContextT>> onInterChangeCallbacks;
     /**
      * Handlers to call after the actual transition happen
      */
     @Singular
-    private final List<StateTransitionCallback<State<ContextT, UserDataT>, ContextT>>         onPostChangeCallbacks;
+    private final List<StateTransitionCallback<State<ContextT, UserDataT>, ContextT>> onPostChangeCallbacks;
     /**
      * Collects (all possible) state transitions
      */
@@ -34,15 +35,15 @@ public class SimpleStateMachineDefinition<ContextT, UserDataT, KeyT> implements 
      * Collects (all possible) states
      */
     @Singular
-    private final Map<KeyT, State<ContextT, UserDataT>>                                       states;
+    private final Map<KeyT, State<ContextT, UserDataT>> states;
     /**
      * Additional metadata
      */
-    private final UserDataT                                                                   userData;
+    private final UserDataT userData;
     /**
      * The UserData to key extractor
      */
-    private final Function<UserDataT, KeyT>                                                   keyExtractor;
+    private final Function<UserDataT, KeyT> keyExtractor;
 
     public SimpleStateMachineDefinition(List<StateTransitionCallback<State<ContextT, UserDataT>, ContextT>> onPreChangeCallbacks,
                                         List<StateTransitionCallback<State<ContextT, UserDataT>, ContextT>> onInterChangeCallbacks,
@@ -60,14 +61,14 @@ public class SimpleStateMachineDefinition<ContextT, UserDataT, KeyT> implements 
         this.keyExtractor = keyExtractor;
     }
 
-    public static class SimpleStateMachineDefinitionBuilder<ContextT, UserDataT, KeyT>{
-        public SimpleStateMachineDefinitionBuilder<ContextT, UserDataT, KeyT> registerState(State<ContextT, UserDataT> state){
-            state(keyExtractor.apply(state.userData()),state);
+    public static class SimpleStateMachineDefinitionBuilder<ContextT, UserDataT, KeyT> {
+        public SimpleStateMachineDefinitionBuilder<ContextT, UserDataT, KeyT> registerState(State<ContextT, UserDataT> state) {
+            state(keyExtractor.apply(state.userData()), state);
             return this;
         }
 
-        public SimpleStateMachineDefinitionBuilder<ContextT, UserDataT, KeyT> registerTransition(StateTransition<State<ContextT, UserDataT>, ContextT, UserDataT> transition){
-            transition(keyExtractor.apply(transition.userData()),transition);
+        public SimpleStateMachineDefinitionBuilder<ContextT, UserDataT, KeyT> registerTransition(StateTransition<State<ContextT, UserDataT>, ContextT, UserDataT> transition) {
+            transition(keyExtractor.apply(transition.userData()), transition);
             return this;
         }
     }
