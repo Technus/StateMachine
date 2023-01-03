@@ -2,10 +2,12 @@ package com.github.technus.stateMachine;
 
 import lombok.*;
 
+@Builder
 public class SimpleTuringMachine {
+    @Builder.Default
     protected int position=0;
-    protected char[] tape = "   010011111   ".toCharArray();
-    protected StateMachine<SimpleTuringMachine,String,String> stateMachine = SimpleStateMachine.<SimpleTuringMachine, String, String>builder()
+    protected char[] tape;
+    protected final StateMachine<SimpleTuringMachine,String,String> stateMachine = SimpleStateMachine.<SimpleTuringMachine, String, String>builder()
             .definition(stateMachineDefinition)
             .context(this)
             .state(q0)
@@ -68,6 +70,6 @@ public class SimpleTuringMachine {
     }
 
     public static void main(String[] args) {
-        new SimpleTuringMachine().run();
+        SimpleTuringMachine.builder().tape("   010011111   ".toCharArray()).build().run();
     }
 }
