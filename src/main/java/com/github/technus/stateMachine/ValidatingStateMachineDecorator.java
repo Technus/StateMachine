@@ -14,31 +14,39 @@ public class ValidatingStateMachineDecorator<ContextT, UserDataT,KeyT> implement
     }
 
     private abstract class ExcludedMethods {
-        public abstract void uncheckedChangeState(State<ContextT, UserDataT> nextState);
-        public abstract void tryChangeState(State<ContextT, UserDataT> desiredState, StateTransition<State<ContextT, UserDataT>, ContextT, UserDataT> transition);
+        public abstract void forceStateChange(State<ContextT, UserDataT> previousState,
+                                              State<ContextT, UserDataT> nextState,
+                                              ContextT context);
+        public abstract void forceStateTransition(State<ContextT, UserDataT> previousState,
+                                                                    State<ContextT, UserDataT> nextState,
+                                                                    ContextT context,
+                                                                    StateTransition<State<ContextT, UserDataT>, ContextT, UserDataT> transition);
     }
 
     @Override
-    public void uncheckedChangeState(State<ContextT, UserDataT> nextState) {
-        val key = definition().keyExtractor().apply(nextState.userData());
-        val value = definition().states().get(key);
+    public void forceStateChange(State<ContextT, UserDataT> previousState,
+                                 State<ContextT, UserDataT> nextState,
+                                 ContextT context) {
+        final KeyT key = definition().keyExtractor().apply(nextState.userData());
+        final State<ContextT, UserDataT> value = definition().states().get(key);
         if (value == null)
             throw new IllegalArgumentException("State was not registered: "+nextState+" "+key);
         if(value!=nextState)
             throw new IllegalArgumentException("State definition does not match: "+nextState+" "+key);
-
-        stateMachine.uncheckedChangeState(nextState);
+        StateMachine.super.forceStateChange(previousState, nextState, context);
     }
 
     @Override
-    public void tryChangeState(State<ContextT, UserDataT> desiredState, StateTransition<State<ContextT, UserDataT>, ContextT, UserDataT> transition) {
-        val key = definition().keyExtractor().apply(transition.userData());
-        val value = definition().transitions().get(key);
+    public void forceStateTransition(State<ContextT, UserDataT> previousState,
+                                     State<ContextT, UserDataT> nextState,
+                                     ContextT context,
+                                     StateTransition<State<ContextT, UserDataT>, ContextT, UserDataT> transition) {
+        final KeyT key = definition().keyExtractor().apply(transition.userData());
+        final StateTransition<State<ContextT, UserDataT>, ContextT, UserDataT> value = definition().transitions().get(key);
         if (value == null)
             throw new IllegalArgumentException("Transition was not registered: "+transition+" "+key);
         if(value!=transition)
             throw new IllegalArgumentException("Transition definition does not match: "+transition+" "+key);
-
-        stateMachine.tryChangeState(desiredState, transition);
+        StateMachine.super.forceStateTransition(previousState, nextState, context, transition);
     }
 }
