@@ -7,7 +7,7 @@ public class SimpleTuringMachine {
     protected char[] tape = "   010011111   ".toCharArray();
     protected StateMachine<SimpleTuringMachine,String,String> stateMachine = SimpleStateMachine.<SimpleTuringMachine, String, String>builder()
             .definition(stateMachineDefinition)
-            .context(new SimpleTuringMachine())
+            .context(this)
             .state(q0)
             .build();
 
