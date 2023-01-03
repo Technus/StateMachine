@@ -58,6 +58,14 @@ public interface StateMachine<ContextT, UserDataT,KeyT> extends UserDataSupplier
 
     /**
      * Will call {@link StateMachine#tryStateTransition(State, StateTransition)} for each registered transition
+     * Equivalent to calling {@link StateMachine#tryStateTransition(State)} with {@link State#undefinedState()}
+     */
+    default void tryStateTransition() {
+        tryStateTransition(State.undefinedState());
+    }
+
+    /**
+     * Will call {@link StateMachine#tryStateTransition(State, StateTransition)} for each registered transition
      * One use case is to call it with {@link State#undefinedState()} as argument to find first matching transition.
      * @param desiredState of the machine
      */
