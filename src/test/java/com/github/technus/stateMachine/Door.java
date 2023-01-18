@@ -43,10 +43,14 @@ public class Door {
                     .registerState(CLOSED)
                     .registerTransition(CLOSING)
                     .registerTransition(OPENING)
+                    .onPreChangeCallback((previousState, nextState, context) -> System.out.println("Pre Change"))
+                    .onInterChangeCallback((previousState, nextState, context) -> System.out.println("Inter Change"))
+                    .onPostChangeCallback((previousState, nextState, context) -> System.out.println("Post Change"))
                     .build();
 
     private final StateMachine<Door, String, String> stateMachine =
             SimpleStateMachine.<Door, String, String>builder()
+                    .userData("doorLogic")
                     .context(this)//bind this machine to data
                     .definition(DEFINITION)//set the behaviour
                     .build();
